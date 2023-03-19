@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="presentation-page">
+        <div class="section-shaped my-0 skew-separator skew-mini">
+            <div class="page-header page-header-small header-filter">
+                <div class="page-header-image"
+                     style="background-image: url('{% static 'img/background/login-bg.jpg' %}');">
+                </div>
+                <div class="container">
+                    <div class="header-body text-center mb-7">
+                        <div class="row justify-content-center">
+                            <div class="px-5">
+                                <h1 class="text-white font-weight-500">실험실</h1>
+                                <p class="text-lead text-white">개인적 흥미로 제작한 프로젝트들입니다. 사소한 프로젝트도 포함되어 있습니다! </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="section-basic-components">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-10 mb-md-5">
+                        <h1 class="display-3">황색언론 구분기</h1>
+                        <p class="lead">
+                            엘리스에서 배운 Bag-of-words 기반 나이브 베이즈 알고리즘으로, 황색언론과 일반 언론을 학습시켜 황색언론을 사용자가
+                            미리 구분할 수 있도록 할 수 있게 만들어 보았습니다.
+                        </p>
+                        <a href="press-identifier/" class="btn btn-primary btn-icon mb-3 mb-sm-0" target="_blank">
+                            <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                            <span class="btn-inner--text">테스트</span>
+                        </a>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="image-container">
+                            <img class="w-50" src="{% static 'img/presentation-page/good-feedback.png' %}">
+                        </div>
+                        <a href="https://www.flaticon.com/free-icons/feedback" title="feedback icons">Feedback icons created by Freepik - Flaticon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 mt-md-5 order-md-2 order-lg-1">
+                        <div class="image-container">
+                            <img class="img shadow rounded img-comments w-100"
+                                 src="{% static 'img/presentation-page/John_F_Kennedy_Signature_2.svg.png' %}">
+                            <img class="img shadow rounded img-blog mt-5 w-100"
+                                 src="{% static 'img/presentation-page/George_Washington_signature.svg.png' %}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mx-auto order-md-1">
+                        <div class="section-description">
+                            <h1 class="display-3">싸인 생성기</h1>
+                            <p class="lead">
+                                In development
+                            </p>
+                            <a href="sign-generator/" class="disabled btn btn-primary btn-icon mb-3 mb-sm-0" target="_blank">
+                                <span class="btn-inner--icon"><i class="fas fa-play"></i></span>
+                                <span class="btn-inner--text">테스트</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

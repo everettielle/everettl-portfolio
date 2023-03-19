@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="section section-hero section-shaped pt-0">
+        <div class="page-header mt-n5 header-filter">
+            <div class="page-header-image" style="background-image: url('{% static 'img/background/landing-bg.jpg' %}');">
+            </div>
+            <div class="container-fluid shape-container d-flex align-items-center py-lg">
+                <div class="col px-0">
+                    <div class="row">
+                        <div class="col-lg-8 ml-5">
+                            <h1 class="video-text text-white">포트폴리오 사이트에 오신 것을 환영합니다!</h1>
+                            <p class="lead text-white">이 사이트에서 제가 개발한 요소들을 체험해 보세요.</p>
+                            <div class="btn-wrapper mt-5">
+                                <a href="/accounts/profile/everett/"
+                                   class="btn btn-primary btn-icon mb-3 mb-sm-0">
+                                    <span class="btn-inner--icon"><i class="fas fa-user-circle"></i></span>
+                                    <span class="btn-inner--text">개발자 프로필</span>
+                                </a>
+                                <a href="/projects/"
+                                   class="btn btn-white btn-icon mb-3 mb-sm-0" target="_blank">
+                                    <span class="btn-inner--icon"><i class="fas fa-rocket"></i></span>
+                                    <span class="btn-inner--text">프로젝트</span>
+                                </a>
+                                <a href="/laboratory/"
+                                   class="btn btn-default btn-icon mb-3 mb-sm-0" target="_blank">
+                                    <span class="btn-inner--icon"><i class="ni ni-app"></i></span>
+                                    <span class="btn-inner--text">실험실</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

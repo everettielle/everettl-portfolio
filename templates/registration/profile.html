@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="profile-page">
+        <section class="page-header page-header-mini header-filter">
+            <!-- Circles background -->
+            <img class="bg-image" src="{% static 'img/background/landing-bg.jpg' %}" style="width: 100%;"
+                 alt="Background">
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-secondary" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <section class="section bg-secondary">
+            <div class="container">
+                <div class="card card-profile shadow mt--300">
+                    <div class="px-4">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 order-lg-1">
+                                <div class="card-profile-stats d-flex justify-content-center">
+                                    <div>
+                                        <span class="heading" style="text-transform:none">@{{ user_info.username }}</span>
+                                        <span class="description">Username</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="javascript:;">
+                                        <img src="/media/{{ user_profile.profile_photo }}" class="rounded-circle"
+                                             alt="Profile">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
+                                <div class="card-profile-actions py-4 mt-lg-0">
+                                    {% if user.pk == user_info.pk %}
+                                    <a href="/edit/accounts/profile/" class="btn btn-sm btn-info mr-4"><i class="fa fa-pencil"></i> 프로필 수정</a>
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    <a href="#" class="btn btn-sm btn-default float-right"><i class="fa fa-user-plus"></i> 메시지</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-5">
+                            <h3>{{ user_info.first_name }} {{ user_info.last_name }}</h3>
+                            {% if user_career %}
+                                <div class="h6 mt-1"><i class="fa fa-briefcase"></i> {{ user_career.job }}</div>
+                            {% endif %}
+                            {% if user_profile.open_profile or user.pk == user_info.pk %}
+                            <div><i class="fa fa-envelope"></i> {{ user_info.email }}</div>
+                            {% endif %}
+                            <div><i class="fa fa-birthday-cake"></i> {{ user_profile.birthday }}</div>
+                        </div>
+                        {% if user_profile.open_profile or user.pk == user_info.pk %}
+                        <div class="mt-5 py-5 border-top text-center">
+                            {% if user_career %}
+                                <h3>Careers</h3>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-9">
+                                        <h5 class="text-left">학력사항</h5>
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">학력</th>
+                                                <th scope="col" colspan="3">내용</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-left">
+                                            {% for school, info in user_career.schools.items %}
+                                                <tr>
+                                                    <th scope="row" rowspan="2" class="text-center align-middle">
+                                                        {{ school }}<br>
+                                                        <span class="badge badge-primary font-weight-normal">{{ info.status }}</span>
+                                                    </th>
+                                                    <td colspan="3">{{ info.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ info.type }}</td>
+                                                    <td>{{ info.entrance }}~{{ info.graduate }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-9">
+                                        <h5 class="text-left">주요활동</h5>
+                                        <table class="table">
+                                            {% for career, info in user_career.careers.items %}
+                                                <thead>
+                                                <tr>
+                                                    <th colspan="4" class="text-left font-weight-normal"
+                                                        style="border-top:none;font-size: 1em;text-transform:none;letter-spacing:0;">{{ info.type }}</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="text-left">
+                                                <tr>
+                                                    <th>{{ info.status }}</th>
+                                                    <td colspan="3">{{ info.name }}<br><span
+                                                            class="font-italic">{{ info.facility }}</span></td>
+                                                </tr>
+                                                </tbody>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="mt-5 py-5 border-top text-center">
+                            <img src="{% static 'img/icons/private-account.png' %}" width="200">
+                            <h3>해당 유저의 프로필은 비공개입니다. </h3>
+                            <a href="https://www.flaticon.com/free-icons/password" title="password icons">Password icons created by Md Tanvirul Haque - Flaticon</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

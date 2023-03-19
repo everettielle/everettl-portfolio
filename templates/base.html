@@ -1,0 +1,195 @@
+<!--
+=========================================================
+* Argon Design System Pro - v1.0.3
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-design-system-pro
+* Copyright 2020 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <title id="document-title">
+        {{ title }} | Everett's Portfolio
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/nucleo-svg.css' %}" rel="stylesheet"/>
+    <!-- CSS Files -->
+    <link href="{% static 'css/argon-design-system.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navbar -->
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-primary navbar-dark position-sticky top-0  py-2">
+    <div class="container">
+        <a class="navbar-brand mr-lg-5" href="/">
+            <img src="{% static 'img/brand/white.png' %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global"
+                aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a href="/">
+                            <img src="{% static 'img/brand/blue.png' %}">
+                        </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global"
+                                aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav navbar-nav-hover align-items-lg-center ml-lg-auto">
+                <li class="nav-item dropdown">
+                    <a href="javascript:;" class="nav-link" data-toggle="dropdown" role="button">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">About Me</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-xl">
+                        <div class="dropdown-menu-inner">
+                            <a href="/projects/"
+                               class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
+                                    <i class="ni ni-spaceship"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Projects</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">저의 주요 프로젝트 성과를 볼 수 있습니다. </p>
+                                </div>
+                            </a>
+                            <a href="/laboratory/"
+                               class="media d-flex align-items-center">
+                                <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
+                                    <i class="ni ni-app"></i>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h6 class="heading text-primary mb-md-1">Laboratory</h6>
+                                    <p class="description d-none d-md-inline-block mb-0">개인적 흥미로 제작한 간단한 프로젝트들을 볼 수
+                                        있습니다. 미구현 기능이 존재할 수 있습니다!</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/accounts/profile/" class="nav-link">
+                            <span class="nav-link-inner--text"><i class="fa fa-user-circle"></i> {{ user.username }} </span>
+                            {% if user.is_superuser %}
+                            <span class="badge badge-danger">관리자 계정</span>
+                            {% else %}
+                            <span class="badge badge-warning">스태프 계정</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/accounts/logout/" class="btn btn-white">
+                            <span class="nav-link-inner--text">로그아웃</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="/accounts/login/" class="btn btn-white">
+                            <span class="nav-link-inner--text">로그인</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% for message in messages %}
+    <div class="position-relative">
+        <div class="alert {{ message.tags }} alert-dismissible fade show position-absolute top-1 w-100" style="z-index: 9999" role="alert">
+            <span class="alert-inner--icon"><i class="ni ni-support-16"></i></span>
+            <span class="alert-inner--text">{{ message | safe }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+{% endfor %}
+<!-- End Navbar -->
+<div class="wrapper">
+    {% block content %}
+    {% endblock %}
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center justify-content-md-between">
+            <div class="col-md-12">
+                <div class="copyright">
+                    &copy; 2023 <a href="https://github.com/everettielle" target="_blank">Everett Lee</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--   Core JS Files   -->
+<script src="{% static 'js/core/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/core/popper.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/core/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="{% static 'js/plugins/bootstrap-switch.js' %}"></script>
+<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="{% static 'js/plugins/nouislider.min.js' %}" type="text/javascript"></script>
+<!--  Plugin for the Carousel, full documentation here: http://jedrzejchalubek.com/ -->
+<script src="{% static 'js/plugins/glide.js' %}" type="text/javascript"></script>
+<!--  Plugin for the DatePicker, full documentation here: https://flatpickr.js.org/ -->
+<script src="{% static 'js/plugins/moment.min.js' %}"></script>
+<!--	Plugin for Select, full documentation here: https://joshuajohnson.co.uk/Choices/ -->
+<script src="{% static 'js/plugins/choices.min.js' %}" type="text/javascript"></script>
+<!--  Plugin for the DateTimePicker, full documentation here: https://flatpickr.js.org/ -->
+<script src="{% static 'js/plugins/datetimepicker.js' %}" type="text/javascript"></script>
+<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<script src="{% static 'js/plugins/jasny-bootstrap.min.js' %}"></script>
+<!-- Plugin for Headrom, full documentation here: https://wicky.nillia.ms/headroom.js/ -->
+<script src="{% static 'js/plugins/headroom.min.js' %}"></script>
+<!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<script src="{% static 'js/argon-design-system.min.js' %}" type="text/javascript"></script>
+<script>
+    // Carousel
+    new Glide('.presentation-cards', {
+        type: 'carousel',
+        startAt: 0,
+        focusAt: 2,
+        perTouch: 1,
+        perView: 5
+    }).mount();
+</script>
+<script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+<script>
+    window.TrackJS &&
+    TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-design-system-pro"
+    });
+</script>
+</body>
+</html>

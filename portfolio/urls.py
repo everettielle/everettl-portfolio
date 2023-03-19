@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
-
+    path('', views.index, name="index"),
+    path('accounts/profile/', views.my_profile, name="my_profile"),
+    path('accounts/profile/<str:username>/', views.profile, name="profile"),
+    path('projects/', views.projects, name="projects"),
+    path('laboratory/', views.lab, name="lab"),
 ]
