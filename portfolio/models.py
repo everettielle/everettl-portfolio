@@ -9,7 +9,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     open_profile = models.BooleanField(default=False)
     birthday = models.DateField()
-    profile_photo = models.FileField()
+    profile_photo = models.ImageField(upload_to=f'')
 
     def __str__(self):
         return self.user.username

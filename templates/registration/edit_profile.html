@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="profile-page">
+        <section class="page-header page-header-mini header-filter">
+            <!-- Circles background -->
+            <img class="bg-image" src="{% static 'img/background/landing-bg.jpg' %}" style="width: 100%;"
+                 alt="Background">
+            <!-- SVG separator -->
+            <div class="separator separator-bottom separator-skew">
+                <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <polygon class="fill-secondary" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <section class="section bg-secondary">
+            <form method="POST" action="/edit/accounts/profile/">
+            {% csrf_token %}
+                <div class="container">
+                    <div class="card card-profile shadow mt--300">
+                        <div class="px-4">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-4 order-lg-1">
+                                    <div class="card-profile-stats d-flex justify-content-center">
+                                        <div>
+                                            <span class="heading" style="text-transform:none">@{{ user_info.username }}</span>
+                                            <span class="description">Username</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3 order-lg-2">
+                                    <div class="card-profile-image">
+                                        <a href="javascript:;">
+                                            <img src="/media/{{ user_profile.profile_photo }}" class="rounded-circle"
+                                                 alt="Profile">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
+                                    <div class="card-profile-actions py-4 mt-lg-0">
+                                        <button type="submit" class="btn btn-success btn-icon mb-3 mb-sm-0">
+                                            <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
+                                            <span class="btn-inner--text">수정 완료</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-5">
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="input-group col-md-4">
+                                        <span class="input-group-text">이름</span>
+                                        <input name="first_name" type="text" aria-label="이름" class="form-control" value="{{ user_info.first_name }}">
+                                        <input name="last_name" type="text" aria-label="성" class="form-control" value="{{ user_info.last_name }}">
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div><i class="fa fa-envelope"></i> {{ user_info.email }}</div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="input-group col-md-4">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-birthday-cake"></i></span>
+                                        </div>
+                                        <input name="birthday" class="flatpickr flatpickr-input form-control" type="text" placeholder="날짜 선택..." value="{{ user_profile.birthday|date:"Y-m-d" }}">
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script>
+        flatpickr('.flatpickr', {});
+
+        <!-- Datepicker - range -->
+        flatpickr('.range', {
+          mode: "range"
+        });
+        <!-- DateTimePicker -->
+        flatpickr('.datetimepicker', {
+          enableTime: false,
+          dateFormat: "Y-m-d",
+        });
+    </script>
+{% endblock %}

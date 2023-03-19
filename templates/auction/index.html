@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="section-shaped my-0 skew-separator skew-mini">
+        <div class="page-header page-header-mini header-filter">
+            <div class="page-header-image" style="background-image: url('{% static 'img/background/auction-bg.jpg' %}');">
+            </div>
+            <div class="container">
+                <div class="header-body mb-7">
+                    <div class="row">
+                        <div class="px-5">
+                            <h1 class="display-1 text-white"><i class="fas fa-shopping-basket"></i> 경매장터</h1>
+                            <p class="text-white">
+                                경매장터에 오신 것을 환영합니다! 이 곳에서 중고거래와 상품 경매를 진행하여 보세요.<br>
+                                (Work In Progress)
+                            </p>
+                            <a href="publish/" class="btn btn-primary btn-icon"><i class="fas fa-upload"></i> 상품 게시하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 class="display-2 mt-3 mb-3">경매중인 상품</h2>
+        <div class="cards">
+            {% for product, picture in auction_products %}
+            <div class="card" style="width: 20rem;">
+                <div class="card-header">
+                    <h5 class="card-title"><i class="fas fa-gavel"></i> 경매 상품</h5>
+                </div>
+                <a href="product/{{ product.pk }}"><img class="card-img-top" src="/media/{{ picture.picture }}" alt="상품 이미지"></a>
+                <div class="card-body">
+                    <h4 class="card-title">{{ product.product.title }}</h4>
+                    <p class="card-text">{{ product.product.description }}</p>
+                    <hr>
+                    <p class="card-text font-weight-bold">
+                        <span class="comma_split">{{ product.current_price }}</span>원
+                        <span class="badge badge-primary font-weight-normal">
+                            <span class="expiration_date">{{ product.expiration_date|date:"Y-m-d\TH:i:s.u\Z" }}</span> 남음</span>
+                        <span class="badge badge-danger badge-circle font-weight-normal">{{ product.bids.bids|length }}</span></p>
+                    <h6 class="card-subtitle text-muted">
+                        <span class="published_date">{{ product.product.published_date|date:"Y-m-d\TH:i:s.u\Z" }}</span> 전
+                    </h6>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <h2 class="display-2 mt-3 mb-3">판매중인 상품</h2>
+        <div class="cards">
+            {% for product, picture in products %}
+            <div class="card" style="width: 20rem;">
+                <div class="card-header">
+                    <h5 class="card-title"><i class="ni ni-app"></i> 중고 상품</h5>
+                </div>
+                <a href="product/{{ product.pk }}"><img class="card-img-top" src="/media/{{ picture.picture }}" alt="상품 이미지"></a>
+                <div class="card-body">
+                    <h4 class="card-title">{{ product.title }}</h4>
+                    <p class="card-text">{{ product.description }}</p>
+                    <hr>
+                    <p class="card-text font-weight-bold">
+                        <span class="comma_split">{{ product.price }}</span>원
+                    <h6 class="card-subtitle text-muted">
+                        <span class="published_date">{{ product.published_date|date:"Y-m-d\TH:i:s.u\Z" }}</span> 전
+                    </h6>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

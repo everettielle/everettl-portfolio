@@ -1,4 +1,4 @@
-"""portfolio URL Configuration
+"""auction URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -17,11 +17,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="index"),
-    path('accounts/register/', views.register, name="register"),
-    path('accounts/profile/', views.my_profile, name="my_profile"),
-    path('accounts/profile/<str:username>/', views.profile, name="profile"),
-    path('edit/accounts/profile/', views.edit_profile, name="edit_profile"),
-    path('projects/', views.projects, name="projects"),
-    path('laboratory/', views.lab, name="lab"),
+    path('', views.index, name='index'),
+    path('product/<int:pk>', views.product_detail, name='product_detail'),
+    path('publish/', views.publish_type, name='publish_type'),
+    path('publish/<str:article_type>', views.publish, name='publish'),
+    path('product/bid/', views.place_bid, name='place_bid'),
 ]

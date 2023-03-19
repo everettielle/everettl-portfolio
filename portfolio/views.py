@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import redirect
 from .models import *
+from .forms import *
 
 
 # Create your views here.
@@ -43,6 +44,52 @@ def profile(request, username):
         'user_info': user_info,
         'user_profile': user_profile,
         'user_career': user_career,
+    })
+
+
+def register(request):
+    if request.method == "POST":
+        form_user = RegisterForm(request.POST)
+        form_profile = ProfileRegisterForm(request.POST)
+        if form_user.is_valid() and form_profile.is_valid():
+            form_user.save()
+            form_profile.save()
+            messages.success(request, "<strong>성공!</strong> 회원가입에 성공하였습니다. 로그인하여 주십시오.", extra_tags="alert-success")
+            return redirect('login')
+        else:
+            messages.warning(request, str(form_user.errors) + str(form_profile.errors), extra_tags="alert-danger")
+            return redirect('register')
+
+    else:
+        form_user = RegisterForm()
+        form_profile = ProfileRegisterForm()
+        return render(request, 'registration/register.html', {'form_user': form_user, 'form_profile': form_profile})
+
+
+def edit_profile(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "<strong>경고!</strong> 로그인이 필요한 작업입니다. ", extra_tags="alert-danger")
+        return redirect('login')
+
+    if request.method == "POST":
+        user = User.objects.get(pk=request.user.pk)
+        profile = Profile.objects.get(pk=request.user.pk)
+
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+
+        profile.birthday = request.POST['birthday']
+
+        user.save()
+        profile.save()
+        return redirect('my_profile')
+    # 유저의 기본 정보를 불러옵니다.
+    user_info = User.objects.get(pk=request.user.pk)
+    user_profile = Profile.objects.get(pk=request.user.pk)
+    return render(request, 'registration/edit_profile.html', {
+        'title': '프로필 수정',
+        'user_info': user_info,
+        'user_profile': user_profile,
     })
 
 
